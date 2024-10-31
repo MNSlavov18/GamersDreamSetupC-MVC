@@ -8,9 +8,12 @@ namespace GamersDreamSetupC_MVC.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        private readonly GamersDreamDBContext _context;
+
+        public HomeController(ILogger<HomeController> logger, GamersDreamDBContext context)
         {
             _logger = logger;
+            _context = context; 
         }
 
         public IActionResult Index()
@@ -19,7 +22,8 @@ namespace GamersDreamSetupC_MVC.Controllers
         } 
         public IActionResult Games()
         {
-            return View();
+            var allGames = _context.Games.ToList();
+            return View(allGames);
         }
         public IActionResult CreateEditGames()
         {
@@ -28,6 +32,10 @@ namespace GamersDreamSetupC_MVC.Controllers
 
         public IActionResult CreateEditGamesForm(Game model)
         {
+            _context.Games.Add(model);
+
+            _context.SaveChanges();
+
             return RedirectToAction("Games");
         }
 

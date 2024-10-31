@@ -2,7 +2,43 @@
     ViewData["Title"] = "Games";
 }
 
+@model List<Game>
+
 <div class="text-center">
     <h1 class="display-4">Games</h1>
+    <br/>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Id
+                </th>
+                <th>
+                    Value
+                </th>
+                <th>
+                    Name
+                </th>
+            </tr>
+        </thead>
+    <tbody>
+        @{
+            foreach (var game in Model)
+                {
+                    <tr>
+                         <td>
+                             @game.Id
+                        </td>
+                        <td>
+                            @game.Value
+                        </td>
+                        <td>
+                            @game.Name
+                        </td>
+                    </tr>
+                }
+        }
+    </tbody>
+</table>
     
 </div>

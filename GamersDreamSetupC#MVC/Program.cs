@@ -1,3 +1,6 @@
+using GamersDreamSetupC_MVC.Models;
+using Microsoft.EntityFrameworkCore;
+
 namespace GamersDreamSetupC_MVC
 {
     public class Program
@@ -8,6 +11,9 @@ namespace GamersDreamSetupC_MVC
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+            builder.Services.AddDbContext<GamersDreamDBContext>(options =>
+            options.UseInMemoryDatabase("GameDb"));
 
             var app = builder.Build();
 
